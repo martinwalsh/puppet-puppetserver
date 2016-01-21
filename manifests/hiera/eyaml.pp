@@ -1,8 +1,9 @@
 class puppetserver::hiera::eyaml (
   $method = 'pkcs7',
+  $ensure = 'present',
 ) {
   Package {
-    ensure   => present,
+    ensure   => $ensure,
     provider => puppetserver_gem,
     notify   => Class['puppetserver::service'],
   }
@@ -14,9 +15,7 @@ class puppetserver::hiera::eyaml (
 
     'gpg': {
       package { 'ruby_gpg': } ->
-      package { 'hiera-eyaml-gpg':
-        ensure => '0.5.rc1',
-      }
+      package { 'hiera-eyaml-gpg': }
     }
 
     default: {
